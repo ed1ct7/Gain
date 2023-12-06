@@ -127,7 +127,7 @@ void GainAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
 
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            channelData[sample] = buffer.getSample(channel, sample) * 0.5;
+            channelData[sample] = buffer.getSample(channel, sample) * Change;
         }
     }
 }

@@ -3,9 +3,11 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-class GainAudioProcessorEditor  : public juce::AudioProcessorEditor
+class GainAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Slider::Listener
 {
 public:
+    void sliderValueChanged(juce::Slider* slider) override;
+    
     GainAudioProcessorEditor (GainAudioProcessor&);
     ~GainAudioProcessorEditor() override;
 
