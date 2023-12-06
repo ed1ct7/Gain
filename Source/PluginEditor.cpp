@@ -7,6 +7,8 @@ GainAudioProcessorEditor::GainAudioProcessorEditor (GainAudioProcessor& p) : Aud
     
     addAndMakeVisible(SlBar);
     SlBar.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
+    SlBar.setRange(-60.0, 60.0);
+
     SlBar.addListener(this);
 }
 
@@ -33,6 +35,6 @@ void GainAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == &SlBar) 
     {
-        audioProcessor.Change = SlBar.getValue();
+        audioProcessor.Change = pow(10, SlBar.getValue()/20);
     }
 }
