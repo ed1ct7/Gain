@@ -20,5 +20,7 @@ private:
 
     GainAudioProcessor& audioProcessor;
 
+    juce::TextButton ByPass{ "ByPass" };
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainAudioProcessorEditor)
 };
