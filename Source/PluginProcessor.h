@@ -40,6 +40,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     double Change;
+    bool BB;
 
 private:
 

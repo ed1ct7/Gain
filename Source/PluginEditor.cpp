@@ -32,6 +32,7 @@ GainAudioProcessorEditor::GainAudioProcessorEditor(GainAudioProcessor& p) : Audi
     ByPass.setClickingTogglesState(true);
     ByPass.setColour(juce::TextButton::ColourIds::buttonColourId, juce::Colours::pink.darker(0.2));
 
+#if 0
     ByPass.onClick = [&]() {
         const auto message = ByPass.getToggleState() ? "Bypass is on" : "Bypass is off";
 
@@ -46,13 +47,19 @@ GainAudioProcessorEditor::GainAudioProcessorEditor(GainAudioProcessor& p) : Audi
         case 2:
             ByPass.setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::black.brighter(0.1));
         }
-    };
+        };
+
+#endif // 0
+
+    ByPass.addListener(this);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 GainAudioProcessorEditor::~GainAudioProcessorEditor()
 {
+    SlBar.removeListener(this);
+    ByPass.removeListener(this);
 }
 
 
@@ -71,6 +78,13 @@ void GainAudioProcessorEditor::resized()
 {
     SlBar.setBounds(0, 0, getWidth() / 3, getHeight());
     ByPass.setBounds(getWidth() / 3, 0, getWidth() / 3, getHeight());
+}
+
+void GainAudioProcessorEditor::buttonClicked(juce::Button* button) {
+    if (button == &ByPass)
+    {
+        audioProcessor.BB = ByPass.getToggleState();
+    }
 }
 
 void GainAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
